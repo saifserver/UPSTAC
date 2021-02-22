@@ -14,6 +14,7 @@ import org.upgrad.upstac.testrequests.TestRequest;
 import org.upgrad.upstac.testrequests.TestRequestQueryService;
 import org.upgrad.upstac.testrequests.TestRequestUpdateService;
 import org.upgrad.upstac.testrequests.flow.TestRequestFlowService;
+import org.upgrad.upstac.users.User;
 
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -70,20 +71,10 @@ public class ConsultationController {
     @PutMapping("/assign/{id}")
     public TestRequest assignForConsultation(@PathVariable Long id) {
 
-        // Implement this method
-
-        // Implement this method to assign a particular test request to the current
-        // doctor(logged in user)
-        // Create an object of User class and get the current logged in user
-        // Create an object of TestRequest class and use the assignForConsultation()
-        // method of testRequestUpdateService to assign the particular id to the current
-        // user
-        // return the above created object
-        // For reference check the method assignForLabTest() method from
-        // LabRequestController class
         try {
-            // replace this line of code with your implementation
-            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "Not implemented");
+            User doctor = userLoggedInService.getLoggedInUser();
+
+            return testRequestUpdateService.assignForConsultation(id, doctor);
 
         } catch (AppException e) {
             throw asBadRequest(e.getMessage());
